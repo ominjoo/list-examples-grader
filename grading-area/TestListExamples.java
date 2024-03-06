@@ -19,6 +19,7 @@ public class TestListExamples {
     assertEquals(expected, merged);
   }
 
+  @Test
   public void testFilter() {
     List<String> list1 = Arrays.asList("moon", "star", "sun");
     List<String> list2 = Arrays.asList("start", "moon", "moon");
