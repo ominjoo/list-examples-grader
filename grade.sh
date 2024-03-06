@@ -45,10 +45,15 @@ fi
 
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-output.txt
 
-lastLine=$(cat test-output.txt | tail -n 2 | head -n 1)
-tests=$(echo $lastLine | awk -F'[, ]' '{print $3}')
-failures=$(echo $lastLine | awk -F'[, ]' '{print $6}')
-successes=$((tests - failures))
+linecount=$(wc -l < "test-output.txt")
 
-echo "Score: $successes / $tests"
-
+if [ "$linecount" -gt 6 ]
+then
+    lastLine=$(cat test-output.txt | tail -n 2 | head -n 1)
+    tests=$(echo $lastLine | awk -F'[, ]' '{print $3}')
+    failures=$(echo $lastLine | awk -F'[, ]' '{print $6}')
+    successes=$((tests - failures))
+    echo "Score: $successes / $tests"
+else
+    echo "Score: 100%"
+fi
